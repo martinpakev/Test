@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Marti\\source\\repos\\HouseRentingSystem.Infrastructure\\HouseRentingSystem.Infrastructure.csproj": {}
+    "C:\\Users\\Marti\\source\\repos\\HouseRenting\\HouseRentingSystem.Infrastructure\\HouseRentingSystem.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Marti\\source\\repos\\HouseRentingSystem.Infrastructure\\HouseRentingSystem.Infrastructure.csproj": {
+    "C:\\Users\\Marti\\source\\repos\\HouseRenting\\HouseRentingSystem.Infrastructure\\HouseRentingSystem.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marti\\source\\repos\\HouseRentingSystem.Infrastructure\\HouseRentingSystem.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Marti\\source\\repos\\HouseRenting\\HouseRentingSystem.Infrastructure\\HouseRentingSystem.Infrastructure.csproj",
         "projectName": "HouseRentingSystem.Infrastructure",
-        "projectPath": "C:\\Users\\Marti\\source\\repos\\HouseRentingSystem.Infrastructure\\HouseRentingSystem.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Marti\\source\\repos\\HouseRenting\\HouseRentingSystem.Infrastructure\\HouseRentingSystem.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Marti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marti\\source\\repos\\HouseRentingSystem.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Marti\\source\\repos\\HouseRenting\\HouseRentingSystem.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -52,6 +52,10 @@
           "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.36, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.36, )"
             }
