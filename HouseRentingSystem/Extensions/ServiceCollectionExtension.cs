@@ -35,7 +35,6 @@ namespace Microsoft.Extensions.DependencyInjection
                 })
                 .AddEntityFrameworkStores<HouseRentingDbContext>();
 
-
             return services;
         }
 
