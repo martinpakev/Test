@@ -11,8 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Agent\" />
-    <Folder Include="Models\House\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
