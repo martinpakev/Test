@@ -2,11 +2,6 @@
 using HouseRentingSystem.Infrastructure.Data.Common;
 using HouseRentingSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HouseRentingSystem.Core.Services
 {
@@ -18,26 +13,34 @@ namespace HouseRentingSystem.Core.Services
         {
             this.repository = repository;
         }
-
-        public Task<bool> CreateAsync(string userId, string phoneNumber)
+         
+        public async Task CreateAsync(string userId, string phoneNumber)
         {
-            throw new NotImplementedException();
+            await repository.AddAsync(new Agent()
+            {
+                UserId = userId,
+                PhoneNumber = phoneNumber
+            });
+
+            await repository.SaveChangesAsync();
         }
 
-        public async Task<bool> ExistByIdASync(string userId)
+        public async Task<bool> ExistByIdAsync(string userId)
         {
            return await repository.AllReadOnly<Agent>()
                 .AnyAsync(a =>  a.UserId == userId);
         }
 
-        public Task<bool> UserHasRentsAsync(string userId)
+        public async Task<bool> UserHasRentsAsync(string userId)
         {
-            throw new NotImplementedException();
+            return await repository.AllReadOnly<House>()
+                .AnyAsync(h => h.RenterId == userId);
         }
 
-        public Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
+        public async Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
         {
-            throw new NotImplementedException();
+            return await repository.AllReadOnly<Agent>()
+                .AnyAsync(a => a.PhoneNumber == phoneNumber);
         }
     }
 }
