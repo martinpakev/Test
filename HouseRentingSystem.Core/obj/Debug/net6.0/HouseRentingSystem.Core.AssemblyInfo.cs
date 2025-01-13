@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HouseRentingSystem.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57b70065b32d480dcc7c7987f71bd5d204845fe4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abc4d034fce3077aa04aeb3308dd43806d658c9b")]
 [assembly: System.Reflection.AssemblyProductAttribute("HouseRentingSystem.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HouseRentingSystem.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
