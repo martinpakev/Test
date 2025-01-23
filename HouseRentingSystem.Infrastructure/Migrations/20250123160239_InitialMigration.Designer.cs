@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseRentingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(HouseRentingDbContext))]
-    [Migration("20250112132835_DomainTablesAdded")]
-    partial class DomainTablesAdded
+    [Migration("20250123160239_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,11 +46,22 @@ namespace HouseRentingSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique();
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Agents");
 
                     b.HasComment("House Agent");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PhoneNumber = "+359888888888",
+                            UserId = "dea12856-c198-4129-b3f3-b893d8395082"
+                        });
                 });
 
             modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.Category", b =>
@@ -73,13 +84,33 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                     b.ToTable("Categories");
 
                     b.HasComment("House category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            Name = "Duplex"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Single-Family"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Name = "Cottage"
+                        });
                 });
 
             modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.House", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasComment("House identifier");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -111,7 +142,6 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         .HasComment("Montly price");
 
                     b.Property<string>("RenterId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasComment("Renter Identifier");
 
@@ -125,9 +155,47 @@ namespace HouseRentingSystem.Infrastructure.Migrations
 
                     b.HasIndex("AgentId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Houses");
 
                     b.HasComment("House to rent");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            Address = "Boyana Neighbourhood, Sofia, Bulgaria",
+                            AgentId = 1,
+                            CategoryId = 2,
+                            Description = "This luxurious house is everything you will need. It is just excellent.",
+                            ImageUrl = "https://i.pinimg.com/originals/a6/f5/85/a6f5850a77633c56e4e4ac4f867e3c00.jpg",
+                            PricePerMonth = 2000.00m,
+                            Title = "Grand House"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Address = "North London, UK (near the border)",
+                            AgentId = 1,
+                            CategoryId = 3,
+                            Description = "A big house for your whole family. Don't miss to buy a house with three bedrooms.",
+                            ImageUrl = "https://www.luxury-architecture.net/wp-content/uploads/2017/12/1513217889-7597-FAIRWAYS-010.jpg",
+                            PricePerMonth = 2100.00m,
+                            RenterId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            Title = "Big House Marina"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Near the Sea Garden in Burgas, Bulgaria",
+                            AgentId = 1,
+                            CategoryId = 2,
+                            Description = "It has the best comfort you will ever ask for. With two bedrooms, it is great for your family.",
+                            ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1024x768/179489660.jpg?k=2029f6d9589b49c95dcc9503a265e292c2cdfcb5277487a0050397c3f8dd545a&o=&hp=1",
+                            PricePerMonth = 1200.00m,
+                            Title = "Family House Comfort"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -245,6 +313,40 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "dea12856-c198-4129-b3f3-b893d8395082",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ee27733f-a4cd-4e64-9633-cf592a577265",
+                            Email = "agent@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "AGENT@MAIL.COM",
+                            NormalizedUserName = "AGENT@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPvgIKX/f+KWHXV+Mqh/eHyK9dPm+zx5e78zTB1FpqpxtfuDuOHbvC+aSK75T6kwtA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "51445601-7a4f-4db3-a853-f6acdbf071c4",
+                            TwoFactorEnabled = false,
+                            UserName = "agent@mail.com"
+                        },
+                        new
+                        {
+                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3aef3819-7804-4d72-a6ea-f008508ce3ed",
+                            Email = "guest@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GUEST@MAIL.COM",
+                            NormalizedUserName = "GUEST@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKp1SBAd0L941/+UTEr6GFzDRdAlw+0DFSM0V7GcntNShO9/CJn16rqj0vFFUjwCbw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "da3e5b60-40d5-40b5-8f92-9be239332b98",
+                            TwoFactorEnabled = false,
+                            UserName = "guest@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -353,7 +455,7 @@ namespace HouseRentingSystem.Infrastructure.Migrations
 
                     b.HasOne("HouseRentingSystem.Infrastructure.Data.Models.Category", "Category")
                         .WithMany("Houses")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

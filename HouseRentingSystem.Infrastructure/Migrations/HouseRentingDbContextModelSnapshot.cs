@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseRentingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(HouseRentingDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class HouseRentingDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -49,7 +49,7 @@ namespace HouseRentingSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Agents");
+                    b.ToTable("Agents", (string)null);
 
                     b.HasComment("House Agent");
 
@@ -79,7 +79,7 @@ namespace HouseRentingSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasComment("House category");
 
@@ -104,8 +104,11 @@ namespace HouseRentingSystem.Infrastructure.Migrations
             modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.House", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasComment("House identifier");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -150,7 +153,9 @@ namespace HouseRentingSystem.Infrastructure.Migrations
 
                     b.HasIndex("AgentId");
 
-                    b.ToTable("Houses");
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Houses", (string)null);
 
                     b.HasComment("House to rent");
 
@@ -312,15 +317,15 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e2131358-3fa8-44fd-a83a-4e713f7871c9",
+                            ConcurrencyStamp = "ee27733f-a4cd-4e64-9633-cf592a577265",
                             Email = "agent@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "AGENT@MAIL.COM",
                             NormalizedUserName = "AGENT@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEL8i2MXYkRbXnlEoJtJXSUKbnqDT1Vk7qoEJH6FqkpJgKiq3pWCSydHJH2bnh8BwlQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPvgIKX/f+KWHXV+Mqh/eHyK9dPm+zx5e78zTB1FpqpxtfuDuOHbvC+aSK75T6kwtA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cfa8b47b-8c80-4cf9-9542-9027fbf1466d",
+                            SecurityStamp = "51445601-7a4f-4db3-a853-f6acdbf071c4",
                             TwoFactorEnabled = false,
                             UserName = "agent@mail.com"
                         },
@@ -328,15 +333,15 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "499e5abc-6cbf-4979-9cbf-eaf8d4055f3d",
+                            ConcurrencyStamp = "3aef3819-7804-4d72-a6ea-f008508ce3ed",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMbS/DsFasyro+LnismKDBru+KnXAfKFX1u/ybKVBGx78Ri502xqA9j+QLhkPZf+WQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKp1SBAd0L941/+UTEr6GFzDRdAlw+0DFSM0V7GcntNShO9/CJn16rqj0vFFUjwCbw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7515376d-0025-4d81-973a-a465d0feba25",
+                            SecurityStamp = "da3e5b60-40d5-40b5-8f92-9be239332b98",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -448,7 +453,7 @@ namespace HouseRentingSystem.Infrastructure.Migrations
 
                     b.HasOne("HouseRentingSystem.Infrastructure.Data.Models.Category", "Category")
                         .WithMany("Houses")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
