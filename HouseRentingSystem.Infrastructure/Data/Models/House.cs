@@ -9,6 +9,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
     public class House
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Comment("House identifier")]
         public int Id { get; set; }
 
@@ -55,7 +56,4 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
         [ForeignKey(nameof(AgentId))]
         public Agent Agent { get; set; } = null!;
     }
-
-
-
 }
