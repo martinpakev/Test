@@ -5,6 +5,7 @@ using HouseRentingSystem.Extensions;
 using HouseRentingSystem.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace HouseRentingSystem.Controllers
 {
@@ -154,21 +155,49 @@ namespace HouseRentingSystem.Controllers
             return RedirectToAction(nameof(Details), new { id });
         }
 
-        /////
-        ///
-
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var model = new HouseDetailsViewModel();
+            if(await houseService.ExistsAsync(id) == false)
+            {
+                return BadRequest();
+            }
 
+            if(await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+
+            var house = await houseService.HouseDetailsByIdAsync(id);
+
+            var model = new HouseDetailsViewModel()
+            {
+                Id = house.Id,
+                Address = house.Address,
+                ImageUrl = house.ImageUrl,
+                Title = house.Title,
+            };
+              
             return View(model);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Delete(HouseDetailsViewModel model)
         {
+            if (await houseService.ExistsAsync(model.Id) == false)
+            {
+                return BadRequest();
+            }
 
+            if (await houseService.HasAgentWithIdAsync(model.Id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+            await houseService.DeleteAsync(model.Id);
+            
             return RedirectToAction(nameof(All));
         }
 
