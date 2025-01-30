@@ -4,11 +4,8 @@ using HouseRentingSystem.Core.Exceptions;
 using HouseRentingSystem.Core.Extensions;
 using HouseRentingSystem.Core.Models.House;
 using HouseRentingSystem.Extensions;
-using HouseRentingSystem.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System.Drawing;
 
 namespace HouseRentingSystem.Controllers
 {
@@ -227,7 +224,7 @@ namespace HouseRentingSystem.Controllers
                 return Unauthorized();
             }
 
-            if(await houseService.isRentedAsync(id))
+            if(await houseService.IsRentedAsync(id))
             {
                 return BadRequest();
             }

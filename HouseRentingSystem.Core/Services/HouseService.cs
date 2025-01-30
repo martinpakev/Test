@@ -206,7 +206,7 @@ namespace HouseRentingSystem.Core.Services
                 
         }
 
-        public async Task<bool> isRentedAsync(int houseId)
+        public async Task<bool> IsRentedAsync(int houseId)
         {
             bool result = false;
             var house = await repository.GetByIdAsync<House>(houseId);
@@ -214,6 +214,20 @@ namespace HouseRentingSystem.Core.Services
             if(house != null)
             {
                 result = house.RenterId != null;   
+            }
+
+            return result;
+        }
+
+        public async Task<bool> IsRentedByUserWithIdAsync(int houseId, string userId)
+        {
+            bool result = false;
+
+            var house = await repository.GetByIdAsync<House>(houseId);
+                
+            if(house != null)
+            {
+                result = house.RenterId == userId;
             }
 
             return result;
