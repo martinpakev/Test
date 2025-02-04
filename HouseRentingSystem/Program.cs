@@ -1,7 +1,12 @@
 using HouseRentingSystem.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using HouseRentingSystem.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("HouseRentingDbContextConnection") ?? throw new InvalidOperationException("Connection string 'HouseRentingDbContextConnection' not found.");
+
 
 builder.Services.AddApplicationDbContext(builder.Configuration);
 builder.Services.AddApplicationIdentity(builder.Configuration);
