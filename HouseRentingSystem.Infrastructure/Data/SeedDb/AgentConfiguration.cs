@@ -9,7 +9,7 @@ namespace HouseRentingSystem.Infrastructure.Data.SeedDb
         public void Configure(EntityTypeBuilder<Agent> builder)
         {
             var data = new SeedData();
-            builder.HasData(new Agent[] {data.Agent});
+            builder.HasData(new Agent[] {data.Agent, data.AdminAgent});
         }
     }
 }
