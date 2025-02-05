@@ -49,6 +49,9 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
         [Comment("Renter Identifier")]
         public string? RenterId  { get; set; }
 
+        [Comment("Is house approved by admin")]
+        public bool IsApproved { get; set; }
+
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; } = null!;
 
