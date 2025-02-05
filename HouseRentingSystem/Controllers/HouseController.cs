@@ -124,7 +124,8 @@ namespace HouseRentingSystem.Controllers
                 return BadRequest();
             }
 
-            if(await  houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+            if(await  houseService.HasAgentWithIdAsync(id, User.Id()) == false
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -143,7 +144,8 @@ namespace HouseRentingSystem.Controllers
                 return BadRequest();
             }
 
-            if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+            if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -173,7 +175,8 @@ namespace HouseRentingSystem.Controllers
                 return BadRequest();
             }
 
-            if(await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+            if(await houseService.HasAgentWithIdAsync(id, User.Id()) == false
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -201,7 +204,8 @@ namespace HouseRentingSystem.Controllers
                 return BadRequest();
             }
 
-            if (await houseService.HasAgentWithIdAsync(model.Id, User.Id()) == false)
+            if (await houseService.HasAgentWithIdAsync(model.Id, User.Id()) == false
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -219,7 +223,8 @@ namespace HouseRentingSystem.Controllers
                 return BadRequest();
             }
 
-            if(await agentService.ExistByIdAsync(User.Id()))
+            if(await agentService.ExistByIdAsync(User.Id())
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
