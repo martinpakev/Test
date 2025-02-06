@@ -98,7 +98,7 @@ namespace HouseRentingSystem.Infrastructure.Data.SeedDb
                 Email = "admin@mail.com",
                 NormalizedEmail = "ADMIN@MAIL.COM",
                 FirstName = "Great",
-                LastName = "Admin"
+                LastName = "Admin",
             };
 
             AdminUserClaim = new IdentityUserClaim<string>()

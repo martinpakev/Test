@@ -50,6 +50,11 @@ namespace HouseRentingSystem.Controllers
             var userId = User.Id();
             IEnumerable<HouseServiceModel> model;
 
+            if (User.IsAdmin())
+            {
+                return RedirectToAction("Mine", "House", new { area = "Admin" });
+            }
+
             if (await agentService.ExistByIdAsync(userId))
             {
                 int agentId = await agentService.GetAgentIdAsync(userId) ?? 0;
