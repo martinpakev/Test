@@ -45,5 +45,9 @@ namespace HouseRentingSystem.Core.Contracts
         Task<bool> IsRentedByUserWithIdAsync(int houseId, string userId);
 
         Task LeaveAsync(int houseId, string userId);
+
+        Task<IEnumerable<HouseServiceModel>> GetUnApprovedAsync(); 
+
+        Task ApproveHouseAsync(int houseId);
     }
 }
