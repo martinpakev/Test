@@ -9,7 +9,7 @@ var message = function () {
         "debug": false,
         "newestOnTop": false,
         "progressBar": false,
-        "positionClass": "toast-top-right",
+        "positionClass": "toast-top-center",
         "preventDuplicates": false,
         "onclick": null,
         "showDuration": "300",
@@ -21,6 +21,7 @@ var message = function () {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
+
     var showSuccess = function (message) {
         toastr["success"](message);
     }

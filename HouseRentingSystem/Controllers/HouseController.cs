@@ -6,6 +6,7 @@ using HouseRentingSystem.Core.Models.House;
 using HouseRentingSystem.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static HouseRentingSystem.Core.Constants.MessageConstants;
 
 namespace HouseRentingSystem.Controllers
 {
@@ -241,6 +242,7 @@ namespace HouseRentingSystem.Controllers
 
             await houseService.RentAsync(id, User.Id());
 
+            TempData[UserMessageSuccess] = "You have rented the house!";
 
             return RedirectToAction(nameof(All));
         }
